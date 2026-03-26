@@ -1,0 +1,28 @@
+aid: timoni
+name: Timoni
+description: >-
+  Timoni is a package manager for Kubernetes powered by CUE that provides a type-safe alternative to Helm charts.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Containers
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/timoni/refs/heads/main/apis.yml
+created: '2026-03-26'
+modified: '2026-03-26'
+specificationVersion: '0.19'
+apis:
+  - aid: timoni:timoni
+    name: Timoni
+    description: >-
+      Timoni is a package manager for Kubernetes powered by CUE that provides a type-safe alternative to Helm charts.
+    humanURL: https://timoni.sh/
+    tags:
+      - Containers
+    properties: []
+common:
+  - type: Website
+    url: https://timoni.sh/
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
