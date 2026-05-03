@@ -1,0 +1,60 @@
+{
+  "title": "Timoni Module Structure",
+  "description": "Structural documentation for a Timoni Kubernetes module distributed as OCI artifact",
+  "type": "object",
+  "fields": [
+    {
+      "name": "name",
+      "type": "string",
+      "description": "Module name in kebab-case",
+      "required": true
+    },
+    {
+      "name": "version",
+      "type": "string (semver)",
+      "description": "Semantic version: v{major}.{minor}.{patch}",
+      "required": true
+    },
+    {
+      "name": "repository",
+      "type": "string (OCI URL)",
+      "description": "OCI registry repository URL",
+      "required": true
+    },
+    {
+      "name": "digest",
+      "type": "string (sha256)",
+      "description": "Content-addressable artifact digest"
+    },
+    {
+      "name": "tags",
+      "type": "array[string]",
+      "description": "Published version tags in the registry"
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "description": "Module purpose and functionality description"
+    },
+    {
+      "name": "license",
+      "type": "string (SPDX)",
+      "description": "Open source license identifier"
+    },
+    {
+      "name": "source",
+      "type": "string (URI)",
+      "description": "Source code repository URL"
+    },
+    {
+      "name": "annotations",
+      "type": "object",
+      "description": "OCI image annotations (created, source, version, revision)"
+    },
+    {
+      "name": "values",
+      "type": "object (CUE)",
+      "description": "CUE-typed configuration values the module accepts"
+    }
+  ]
+}

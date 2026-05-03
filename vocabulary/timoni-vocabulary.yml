@@ -1,0 +1,166 @@
+vocabulary:
+  name: Timoni Vocabulary
+  description: >-
+    Vocabulary and taxonomy for the Timoni Kubernetes package manager covering
+    modules, bundles, instances, OCI artifacts, CUE configuration, and deployment concepts.
+  version: '1.0'
+  created: '2026-05-03'
+  modified: '2026-05-03'
+
+terms:
+  - term: Module
+    definition: >-
+      A Timoni packaging unit containing CUE definitions and constraints that
+      describe how to deploy a Kubernetes application. Modules accept user-provided
+      values and output Kubernetes objects. Distributed as OCI artifacts.
+    tags:
+      - Core Concept
+      - Packaging
+
+  - term: Instance
+    definition: >-
+      A deployed instantiation of a Timoni module on a Kubernetes cluster,
+      identified by a unique name within a namespace. A module can have
+      multiple instances across different namespaces.
+    tags:
+      - Core Concept
+      - Deployment
+
+  - term: Bundle
+    definition: >-
+      A CUE file that groups multiple Timoni module instances with their values
+      and module references. Bundles manage entire application stacks as a
+      single deployable unit.
+    tags:
+      - Core Concept
+      - Orchestration
+
+  - term: Artifact
+    definition: >-
+      The OCI-compliant packaging format used to distribute Timoni modules
+      in container registries alongside application images. Supports semantic
+      versioning and cryptographic signing.
+    aliases:
+      - OCI Artifact
+    tags:
+      - Core Concept
+      - Distribution
+
+  - term: CUE
+    definition: >-
+      An open-source language for data validation, schema definition, and
+      configuration. Timoni uses CUE to provide type safety for Kubernetes
+      configuration, replacing YAML templating with a proper type system.
+    aliases:
+      - CUE Language
+      - Configure Unify Execute
+    tags:
+      - Language
+      - Configuration
+
+  - term: Bundle Runtime
+    definition: >-
+      A Timoni API that provides declarative management of application delivery
+      across environments by fetching values from the Kubernetes API and mapping
+      them to Bundle fields dynamically.
+    tags:
+      - API
+      - Advanced Feature
+
+  - term: Drift Detection
+    definition: >-
+      Timoni's capability to compare the desired state from a Bundle or Module
+      with the actual state in the Kubernetes cluster and report or correct
+      any differences.
+    tags:
+      - Operations
+      - Kubernetes
+
+  - term: OCI Registry
+    definition: >-
+      An Open Container Initiative compliant registry (e.g., GitHub Container
+      Registry, Docker Hub) used to store and distribute Timoni modules as
+      versioned OCI artifacts.
+    aliases:
+      - Container Registry
+    tags:
+      - Infrastructure
+      - Distribution
+
+  - term: Helm
+    definition: >-
+      The Kubernetes package manager that Timoni was inspired by. Timoni provides
+      a type-safe alternative to Helm by using CUE instead of Go templates for
+      configuration, avoiding many class of runtime template errors.
+    tags:
+      - Comparison
+      - Context
+
+  - term: Vendor
+    definition: >-
+      The process of downloading and storing dependencies locally within a Timoni
+      module. The `timoni mod vendor k8s` command vendors Kubernetes API schemas
+      for offline CUE validation.
+    tags:
+      - Dependency Management
+      - Offline
+
+  - term: Signing
+    definition: >-
+      Cryptographic signing of Timoni module OCI artifacts using tools like cosign,
+      enabling consumers to verify artifact authenticity and integrity before deployment.
+    tags:
+      - Security
+      - Supply Chain
+
+  - term: Rollback
+    definition: >-
+      The ability to revert a Timoni instance to a previous version by re-applying
+      an earlier artifact version from the OCI registry.
+    tags:
+      - Operations
+      - Reliability
+
+  - term: Kubernetes CRD
+    definition: >-
+      Custom Resource Definition - Timoni supports managing the lifecycle of CRDs
+      defined by modules, including installation ordering and upgrade handling.
+    aliases:
+      - Custom Resource Definition
+    tags:
+      - Kubernetes
+      - Extension
+
+  - term: Semantic Versioning
+    definition: >-
+      The versioning scheme (MAJOR.MINOR.PATCH) used for Timoni module tags in OCI
+      registries, enabling reproducible deployments and controlled upgrades.
+    aliases:
+      - SemVer
+    tags:
+      - Versioning
+      - Distribution
+
+  - term: Apply
+    definition: >-
+      The Timoni command operation that creates or updates a module instance or
+      bundle on a Kubernetes cluster, reconciling desired state with cluster state.
+    tags:
+      - Operations
+      - CLI
+
+  - term: Build
+    definition: >-
+      The Timoni command operation that renders CUE configuration into Kubernetes
+      YAML manifests for preview or external application without deploying.
+    tags:
+      - Operations
+      - CLI
+
+  - term: Shell Completion
+    definition: >-
+      Tab completion scripts for Timoni CLI commands, available for bash, fish,
+      PowerShell, and zsh shells.
+    tags:
+      - Developer Experience
+      - CLI

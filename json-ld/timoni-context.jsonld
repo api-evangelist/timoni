@@ -1,0 +1,52 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "timoni": "https://timoni.sh/vocab/",
+    "oci": "https://opencontainers.org/vocab/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Module": "timoni:Module",
+    "ModuleInstance": "timoni:ModuleInstance",
+    "Bundle": "timoni:Bundle",
+    "BundleRuntime": "timoni:BundleRuntime",
+    "Artifact": "timoni:Artifact",
+    "OciManifest": "oci:Manifest",
+    "OciLayer": "oci:Layer",
+    "Registry": "timoni:Registry",
+    "SoftwarePackage": "schema:SoftwareApplication",
+
+    "id": "@id",
+    "name": "schema:name",
+    "description": "schema:description",
+    "version": "schema:version",
+    "created": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+
+    "module": "timoni:module",
+    "instance": "timoni:instance",
+    "namespace": "timoni:kubernetesNamespace",
+    "cluster": "timoni:kubernetesCluster",
+    "values": "timoni:configurationValues",
+    "bundle": "timoni:bundle",
+    "runtime": "timoni:runtime",
+
+    "digest": "oci:digest",
+    "mediaType": "oci:mediaType",
+    "size": "oci:size",
+    "layers": "oci:layer",
+    "annotations": "oci:annotations",
+
+    "tags": "schema:keywords",
+    "registry": "schema:url",
+    "repository": "timoni:ociRepository",
+
+    "cueModule": "timoni:cueModule",
+    "schemaVersion": "oci:schemaVersion",
+    "source": "schema:codeRepository",
+    "revision": "schema:softwareVersion",
+    "license": "schema:license"
+  }
+}

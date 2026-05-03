@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/timoni/main/json-schema/timoni-module-schema.json",
+  "title": "Timoni Module",
+  "description": "Schema for a Timoni Kubernetes module definition distributed as an OCI artifact",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Module name in kebab-case"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^v?[0-9]+\\.[0-9]+\\.[0-9]+",
+      "description": "Semantic version of the module"
+    },
+    "repository": {
+      "type": "string",
+      "description": "OCI registry repository URL for the module"
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "description": "OCI artifact digest for reproducible deployments"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Version tags available for this module"
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description of the module"
+    },
+    "license": {
+      "type": "string",
+      "description": "SPDX license identifier"
+    },
+    "source": {
+      "type": "string",
+      "format": "uri",
+      "description": "Source code repository URL"
+    },
+    "annotations": {
+      "type": "object",
+      "description": "OCI annotations for the module artifact",
+      "properties": {
+        "org.opencontainers.image.created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "org.opencontainers.image.source": {
+          "type": "string"
+        },
+        "org.opencontainers.image.version": {
+          "type": "string"
+        },
+        "org.opencontainers.image.revision": {
+          "type": "string"
+        }
+      }
+    },
+    "values": {
+      "type": "object",
+      "description": "CUE-validated configuration values accepted by the module"
+    }
+  },
+  "required": ["name", "version", "repository"]
+}

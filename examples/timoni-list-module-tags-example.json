@@ -1,0 +1,27 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://ghcr.io/v2/stefanprodan/modules/podinfo/tags/list",
+    "headers": {
+      "Authorization": "Bearer ghp_example_token",
+      "Accept": "application/vnd.oci.image.manifest.v1+json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "name": "stefanprodan/modules/podinfo",
+      "tags": [
+        "6.7.0",
+        "6.6.2",
+        "6.6.1",
+        "6.6.0",
+        "6.5.4",
+        "latest"
+      ]
+    }
+  }
+}
