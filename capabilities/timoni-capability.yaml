@@ -1,0 +1,242 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Timoni Module Registry API
+  description: Timoni is a package manager for Kubernetes powered by CUE that provides type-safe alternatives to Helm charts.
+    Timoni modules are distributed as OCI artifacts in container registries. This API describes the OCI registry operations
+    used for module distribution, versioning, and artifact management within the Timoni ecosystem.
+  tags:
+  - Timoni
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: timoni
+    baseUri: https://ghcr.io
+    description: Timoni Module Registry API HTTP API.
+    authentication:
+      type: bearer
+      token: '{{TIMONI_TOKEN}}'
+    resources:
+    - name: v2-registry-module-tags-list
+      path: /v2/{registry}/{module}/tags/list
+      operations:
+      - name: listmoduletags
+        method: GET
+        description: List Module Tags
+        inputParameters:
+        - name: registry
+          in: path
+          type: string
+          required: true
+          description: Registry namespace or organization
+        - name: module
+          in: path
+          type: string
+          required: true
+          description: Module name
+        - name: n
+          in: query
+          type: integer
+          description: Maximum number of tags to return
+        - name: last
+          in: query
+          type: string
+          description: Last tag for pagination
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-registry-module-manifests-reference
+      path: /v2/{registry}/{module}/manifests/{reference}
+      operations:
+      - name: getmodulemanifest
+        method: GET
+        description: Get Module Manifest
+        inputParameters:
+        - name: registry
+          in: path
+          type: string
+          required: true
+        - name: module
+          in: path
+          type: string
+          required: true
+        - name: reference
+          in: path
+          type: string
+          required: true
+          description: Tag (e.g., v1.0.0) or digest (sha256:...)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-registry-module-blobs-digest
+      path: /v2/{registry}/{module}/blobs/{digest}
+      operations:
+      - name: getmoduleblob
+        method: GET
+        description: Get Module Blob
+        inputParameters:
+        - name: registry
+          in: path
+          type: string
+          required: true
+        - name: module
+          in: path
+          type: string
+          required: true
+        - name: digest
+          in: path
+          type: string
+          required: true
+          description: Blob digest in format sha256:<hash>
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: timoni-rest
+    description: REST adapter for Timoni Module Registry API.
+    resources:
+    - path: /v2/{registry}/{module}/tags/list
+      name: listmoduletags
+      operations:
+      - method: GET
+        name: listmoduletags
+        description: List Module Tags
+        call: timoni.listmoduletags
+        with:
+          registry: rest.registry
+          module: rest.module
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v2/{registry}/{module}/manifests/{reference}
+      name: getmodulemanifest
+      operations:
+      - method: GET
+        name: getmodulemanifest
+        description: Get Module Manifest
+        call: timoni.getmodulemanifest
+        with:
+          registry: rest.registry
+          module: rest.module
+          reference: rest.reference
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v2/{registry}/{module}/blobs/{digest}
+      name: getmoduleblob
+      operations:
+      - method: GET
+        name: getmoduleblob
+        description: Get Module Blob
+        call: timoni.getmoduleblob
+        with:
+          registry: rest.registry
+          module: rest.module
+          digest: rest.digest
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: timoni-mcp
+    transport: http
+    description: MCP adapter for Timoni Module Registry API for AI agent use.
+    tools:
+    - name: listmoduletags
+      description: List Module Tags
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: timoni.listmoduletags
+      with:
+        registry: tools.registry
+        module: tools.module
+        n: tools.n
+        last: tools.last
+      inputParameters:
+      - name: registry
+        type: string
+        description: Registry namespace or organization
+        required: true
+      - name: module
+        type: string
+        description: Module name
+        required: true
+      - name: n
+        type: integer
+        description: Maximum number of tags to return
+      - name: last
+        type: string
+        description: Last tag for pagination
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getmodulemanifest
+      description: Get Module Manifest
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: timoni.getmodulemanifest
+      with:
+        registry: tools.registry
+        module: tools.module
+        reference: tools.reference
+      inputParameters:
+      - name: registry
+        type: string
+        description: registry
+        required: true
+      - name: module
+        type: string
+        description: module
+        required: true
+      - name: reference
+        type: string
+        description: Tag (e.g., v1.0.0) or digest (sha256:...)
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getmoduleblob
+      description: Get Module Blob
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: timoni.getmoduleblob
+      with:
+        registry: tools.registry
+        module: tools.module
+        digest: tools.digest
+      inputParameters:
+      - name: registry
+        type: string
+        description: registry
+        required: true
+      - name: module
+        type: string
+        description: module
+        required: true
+      - name: digest
+        type: string
+        description: Blob digest in format sha256:<hash>
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    TIMONI_TOKEN: TIMONI_TOKEN
