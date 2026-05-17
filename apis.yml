@@ -39,7 +39,7 @@ apis:
       - type: OpenAPI
         url: >-
           https://raw.githubusercontent.com/api-evangelist/timoni/refs/heads/main/openapi/timoni-openapi.yml
-      - type: GitHub Repository
+      - type: GitHubRepository
         url: https://github.com/stefanprodan/timoni
       - type: JSONSchema
         url: >-
@@ -81,9 +81,9 @@ common:
     url: https://timoni.sh/
   - type: Documentation
     url: https://timoni.sh/
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/stefanprodan/timoni
-  - type: Getting Started
+  - type: GettingStarted
     url: https://timoni.sh/quickstart/
   - type: Concepts
     url: https://timoni.sh/concepts/
