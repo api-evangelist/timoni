@@ -1,0 +1,153 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Timoni Module Registry API — Modules
+  description: 'Timoni Module Registry API — Modules. 2 operations. Lead operation: Get Module Manifest. Self-contained Naftiko
+    capability covering one Timoni business surface.'
+  tags:
+  - Timoni
+  - Modules
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TIMONI_API_KEY: TIMONI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: timoni-modules
+    baseUri: https://ghcr.io
+    description: Timoni Module Registry API — Modules business capability. Self-contained, no shared references.
+    resources:
+    - name: v2-registry-module-manifests-reference
+      path: /v2/{registry}/{module}/manifests/{reference}
+      operations:
+      - name: getmodulemanifest
+        method: GET
+        description: Get Module Manifest
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: registry
+          in: path
+          type: string
+          required: true
+        - name: module
+          in: path
+          type: string
+          required: true
+        - name: reference
+          in: path
+          type: string
+          description: Tag (e.g., v1.0.0) or digest (sha256:...)
+          required: true
+    - name: v2-registry-module-tags-list
+      path: /v2/{registry}/{module}/tags/list
+      operations:
+      - name: listmoduletags
+        method: GET
+        description: List Module Tags
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: registry
+          in: path
+          type: string
+          description: Registry namespace or organization
+          required: true
+        - name: module
+          in: path
+          type: string
+          description: Module name
+          required: true
+        - name: n
+          in: query
+          type: integer
+          description: Maximum number of tags to return
+        - name: last
+          in: query
+          type: string
+          description: Last tag for pagination
+    authentication:
+      type: bearer
+      token: '{{env.TIMONI_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: timoni-modules-rest
+    port: 8080
+    description: REST adapter for Timoni Module Registry API — Modules. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v2/{registry}/{module}/manifests/{reference}
+      name: v2-registry-module-manifests-reference
+      description: REST surface for v2-registry-module-manifests-reference.
+      operations:
+      - method: GET
+        name: getmodulemanifest
+        description: Get Module Manifest
+        call: timoni-modules.getmodulemanifest
+        with:
+          registry: rest.registry
+          module: rest.module
+          reference: rest.reference
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v2/{registry}/{module}/tags/list
+      name: v2-registry-module-tags-list
+      description: REST surface for v2-registry-module-tags-list.
+      operations:
+      - method: GET
+        name: listmoduletags
+        description: List Module Tags
+        call: timoni-modules.listmoduletags
+        with:
+          registry: rest.registry
+          module: rest.module
+          n: rest.n
+          last: rest.last
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: timoni-modules-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Timoni Module Registry API — Modules. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-module-manifest
+      description: Get Module Manifest
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: timoni-modules.getmodulemanifest
+      with:
+        registry: tools.registry
+        module: tools.module
+        reference: tools.reference
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-module-tags
+      description: List Module Tags
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: timoni-modules.listmoduletags
+      with:
+        registry: tools.registry
+        module: tools.module
+        n: tools.n
+        last: tools.last
+      outputParameters:
+      - type: object
+        mapping: $.
