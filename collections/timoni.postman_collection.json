@@ -1,0 +1,675 @@
+{
+  "item": [
+    {
+      "id": "3a302387-0adf-40b2-a8af-12aeb19b62ae",
+      "name": "Modules",
+      "description": {
+        "content": "Timoni module management and distribution",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "385dcf0c-4093-4893-be60-453422089dca",
+          "name": "List Module Tags",
+          "request": {
+            "name": "List Module Tags",
+            "description": {
+              "content": "List all available version tags for a Timoni module in the OCI registry. Returns all published versions using semantic versioning.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":registry",
+                ":module",
+                "tags",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "n",
+                  "value": "<integer>",
+                  "description": "Maximum number of tags to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "last",
+                  "value": "<string>",
+                  "description": "Last tag for pagination"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "registry",
+                  "description": "(Required) Registry namespace or organization"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "module",
+                  "description": "(Required) Module name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5566bfca-10a4-4415-9b46-7657a21a2ce0",
+              "name": "List of module tags",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":registry",
+                    ":module",
+                    "tags",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "n",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "last",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "registry",
+                      "description": "(Required) Registry namespace or organization"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "module",
+                      "description": "(Required) Module name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "660a238a-ff68-4274-b1bf-74b8d8fc3474",
+              "name": "Unauthorized - invalid or missing credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":registry",
+                    ":module",
+                    "tags",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "n",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "last",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "registry",
+                      "description": "(Required) Registry namespace or organization"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "module",
+                      "description": "(Required) Module name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"detail\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"detail\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5104fea-4b23-4564-88c2-945a93290793",
+              "name": "Module or artifact not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":registry",
+                    ":module",
+                    "tags",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "n",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "last",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "registry",
+                      "description": "(Required) Registry namespace or organization"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "module",
+                      "description": "(Required) Module name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"detail\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"detail\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e5aa83f0-0d80-4dd3-b94b-333a6d074d30",
+          "name": "Get Module Manifest",
+          "request": {
+            "name": "Get Module Manifest",
+            "description": {
+              "content": "Retrieve the OCI manifest for a specific Timoni module version. The manifest contains the module metadata, CUE definitions, and layer digests.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":registry",
+                ":module",
+                "manifests",
+                ":reference"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "registry",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "module",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reference",
+                  "description": "(Required) Tag (e.g., v1.0.0) or digest (sha256:...)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.oci.image.manifest.v1+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "124b7e0a-e53f-449b-abe1-be2215f00fcb",
+              "name": "OCI manifest for the module",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":registry",
+                    ":module",
+                    "manifests",
+                    ":reference"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "registry",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "module",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reference",
+                      "description": "(Required) Tag (e.g., v1.0.0) or digest (sha256:...)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.oci.image.manifest.v1+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.oci.image.manifest.v1+json"
+                }
+              ],
+              "body": "{\n  \"schemaVersion\": 9304,\n  \"mediaType\": \"string\",\n  \"config\": {\n    \"mediaType\": \"string\",\n    \"size\": 8424,\n    \"digest\": \"string\"\n  },\n  \"layers\": [\n    {\n      \"mediaType\": \"string\",\n      \"size\": 7140,\n      \"digest\": \"string\",\n      \"annotations\": {}\n    },\n    {\n      \"mediaType\": \"string\",\n      \"size\": 3792,\n      \"digest\": \"string\",\n      \"annotations\": {}\n    }\n  ],\n  \"annotations\": {\n    \"org.opencontainers.image.created\": \"string\",\n    \"org.opencontainers.image.source\": \"string\",\n    \"org.opencontainers.image.version\": \"string\",\n    \"org.opencontainers.image.revision\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63a7b210-7df7-48ab-925f-9641438cddbc",
+              "name": "Module or artifact not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":registry",
+                    ":module",
+                    "manifests",
+                    ":reference"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "registry",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "module",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reference",
+                      "description": "(Required) Tag (e.g., v1.0.0) or digest (sha256:...)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"detail\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"detail\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "905a173a-d18f-428b-9d4c-ce160acdd499",
+      "name": "Artifacts",
+      "description": {
+        "content": "OCI artifact operations for Timoni packages",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0c751d31-0708-468b-a6a7-8708fc448cf3",
+          "name": "Get Module Blob",
+          "request": {
+            "name": "Get Module Blob",
+            "description": {
+              "content": "Download a specific blob layer of a Timoni module, typically containing CUE definitions, values schemas, and module metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                ":registry",
+                ":module",
+                "blobs",
+                ":digest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "registry",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "module",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "digest",
+                  "description": "(Required) Blob digest in format sha256:<hash>"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3b852b31-09ee-4c82-9e70-fed05186f5c8",
+              "name": "Module blob content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":registry",
+                    ":module",
+                    "blobs",
+                    ":digest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "registry",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "module",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "digest",
+                      "description": "(Required) Blob digest in format sha256:<hash>"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "319b6b50-12d5-40d6-96a6-722e32d7c9c1",
+              "name": "Module or artifact not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    ":registry",
+                    ":module",
+                    "blobs",
+                    ":digest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "registry",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "module",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "digest",
+                      "description": "(Required) Blob digest in format sha256:<hash>"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"detail\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\",\n      \"detail\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "8f84c90f-1427-41c2-97a8-60a16187af0d",
+      "name": "Registry",
+      "description": {
+        "content": "Container registry authentication and operations",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ghcr.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0e4872a7-23a5-4a3b-b781-2f5955fec3ac",
+    "name": "Timoni Module Registry API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Timoni is a package manager for Kubernetes powered by CUE that provides type-safe alternatives to Helm charts. Timoni modules are distributed as OCI artifacts in container registries. This API describes the OCI registry operations used for module distribution, versioning, and artifact management within the Timoni ecosystem.\n\nContact Support:\n Name: Timoni Documentation",
+      "type": "text/plain"
+    }
+  }
+}

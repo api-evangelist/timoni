@@ -1,6 +1,26 @@
-# Timoni
+# Timoni (timoni)
 
 Timoni is a package manager for Kubernetes powered by CUE that provides a type-safe alternative to Helm charts. It enables software vendors to define complex application deployments packaged as Modules using CUE definitions, distributed as OCI artifacts in container registries with semantic versioning and cryptographic signing.
+
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/timoni/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/timoni/refs/heads/main/apis.yml)
+
+## Scope
+
+- **Type:** Index
+- **Position:** Consumer
+- **Access:** Open Source
+
+## Tags
+
+- Containers
+- Kubernetes
+- Package Manager
+- CUE
+
+## Timestamps
+
+- **Created:** 2026-03-26
+- **Modified:** 2026-05-19
 
 ## APIs
 
@@ -8,62 +28,40 @@ Timoni is a package manager for Kubernetes powered by CUE that provides a type-s
 
 Timoni modules are distributed as OCI artifacts in container registries. The registry API provides operations for listing module tags, retrieving OCI manifests, and downloading module blobs containing CUE definitions and Kubernetes configurations.
 
-- **Documentation:** [https://timoni.sh/](https://timoni.sh/)
-- **GitHub Repository:** [https://github.com/stefanprodan/timoni](https://github.com/stefanprodan/timoni)
+- **Human URL:** [https://timoni.sh/](https://timoni.sh/)
 - **Base URL:** `https://ghcr.io`
 
-## Features
+#### Tags
 
-- Type-safe Kubernetes configuration via CUE
-- OCI artifact distribution and signing
-- Semantic versioning for modules
-- Bundle-based multi-instance management
-- Kubernetes CRD lifecycle management
-- Drift detection and correction
-- Bundle Runtime API for dynamic configuration
-- Cryptographic signing and verification
+- Containers
+- Kubernetes
+- Package Manager
+- OCI Registry
 
-## Use Cases
+#### Properties
 
-- Kubernetes application packaging and distribution
-- Type-safe alternative to Helm charts
-- Multi-service deployment orchestration
-- GitOps-compatible application delivery
-- Kubernetes module versioning and rollback
+- [Documentation](https://timoni.sh/)
+- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/timoni/refs/heads/main/openapi/timoni-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [GitHub Repository](https://github.com/stefanprodan/timoni)
+- [JSON Schema](https://raw.githubusercontent.com/api-evangelist/timoni/refs/heads/main/json-schema/timoni-module-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Structure](https://raw.githubusercontent.com/api-evangelist/timoni/refs/heads/main/json-structure/timoni-module-structure.json)
+- [J S O N L D Context](https://raw.githubusercontent.com/api-evangelist/timoni/refs/heads/main/json-ld/timoni-context.jsonld)
+- [Postman Collection](collections/timoni.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/timoni.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
-## Artifacts
+## Common Properties
 
-| Type | File |
-|---|---|
-| OpenAPI | [timoni-openapi.yml](openapi/timoni-openapi.yml) |
-| JSON Schema | [timoni-module-schema.json](json-schema/timoni-module-schema.json) |
-| JSON Structure | [timoni-module-structure.json](json-structure/timoni-module-structure.json) |
-| JSON-LD Context | [timoni-context.jsonld](json-ld/timoni-context.jsonld) |
-| Vocabulary | [timoni-vocabulary.yml](vocabulary/timoni-vocabulary.yml) |
+- [Website](https://timoni.sh/)
+- [Documentation](https://timoni.sh/)
+- [GitHub Organization](https://github.com/stefanprodan/timoni)
+- [Getting Started](https://timoni.sh/quickstart/)
+- [Concepts](https://timoni.sh/concepts/)
+- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/timoni/refs/heads/main/openapi/timoni-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [JSON Schema](https://raw.githubusercontent.com/api-evangelist/timoni/refs/heads/main/json-schema/timoni-module-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [J S O N L D Context](https://raw.githubusercontent.com/api-evangelist/timoni/refs/heads/main/json-ld/timoni-context.jsonld)
+- [Vocabulary](https://raw.githubusercontent.com/api-evangelist/timoni/refs/heads/main/vocabulary/timoni-vocabulary.yml)
 
-## Examples
+## Maintainers
 
-- [List Module Tags Example](examples/timoni-list-module-tags-example.json)
-
-## Integrations
-
-- GitHub Container Registry (ghcr.io)
-- Docker Hub
-- Any OCI-compatible container registry
-- Kubernetes clusters
-- Flux CD
-
-## Solutions
-
-- Cloud-native application delivery
-- Kubernetes package management
-- Infrastructure as code
-- CUE-based configuration management
-
-## Links
-
-- **Website:** [https://timoni.sh/](https://timoni.sh/)
-- **Documentation:** [https://timoni.sh/](https://timoni.sh/)
-- **Getting Started:** [https://timoni.sh/quickstart/](https://timoni.sh/quickstart/)
-- **Concepts:** [https://timoni.sh/concepts/](https://timoni.sh/concepts/)
-- **GitHub:** [https://github.com/stefanprodan/timoni](https://github.com/stefanprodan/timoni)
+**FN:** Kin Lane
+**Email:** kin@apievangelist.com
