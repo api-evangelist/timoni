@@ -72,6 +72,10 @@ solutions:
   - Infrastructure as code
   - CUE-based configuration management
 common:
+  - type: DomainSecurity
+    url: security/timoni-domain-security.yml
+  - type: Authentication
+    url: authentication/timoni-authentication.yml
   - type: Website
     url: https://timoni.sh/
   - type: Documentation

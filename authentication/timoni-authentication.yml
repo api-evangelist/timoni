@@ -1,0 +1,19 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/timoni-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: OCI registry authentication token
+  sources:
+  - openapi/timoni-openapi.yml
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: Username and password authentication for OCI registry
+  sources:
+  - openapi/timoni-openapi.yml
