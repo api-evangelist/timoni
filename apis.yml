@@ -72,6 +72,8 @@ solutions:
   - Infrastructure as code
   - CUE-based configuration management
 common:
+  - type: AgenticAccess
+    url: agentic-access/timoni-agentic-access.yml
   - type: DomainSecurity
     url: security/timoni-domain-security.yml
   - type: Authentication
