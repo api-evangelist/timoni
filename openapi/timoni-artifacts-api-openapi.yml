@@ -1,0 +1,84 @@
+openapi: 3.0.3
+info:
+  title: Timoni Module Registry Artifacts API
+  description: Timoni is a package manager for Kubernetes powered by CUE that provides type-safe alternatives to Helm charts. Timoni modules are distributed as OCI artifacts in container registries. This API describes the OCI registry operations used for module distribution, versioning, and artifact management within the Timoni ecosystem.
+  version: v1
+  contact:
+    name: Timoni Documentation
+    url: https://timoni.sh/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://ghcr.io
+  description: GitHub Container Registry (default for Timoni modules)
+tags:
+- name: Artifacts
+  description: OCI artifact operations for Timoni packages
+paths:
+  /v2/{registry}/{module}/blobs/{digest}:
+    get:
+      operationId: getModuleBlob
+      summary: Get Module Blob
+      description: Download a specific blob layer of a Timoni module, typically containing CUE definitions, values schemas, and module metadata.
+      tags:
+      - Artifacts
+      parameters:
+      - name: registry
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: module
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: digest
+        in: path
+        required: true
+        description: Blob digest in format sha256:<hash>
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Module blob content
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+              detail:
+                type: string
+  responses:
+    NotFound:
+      description: Module or artifact not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: OCI registry authentication token
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Username and password authentication for OCI registry
