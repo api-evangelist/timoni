@@ -5,9 +5,22 @@ description: >-
   enables software vendors to define complex application deployments packaged as Modules using CUE definitions,
   distributed as OCI artifacts in container registries with semantic versioning and cryptographic signing.
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: Open Source
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/timoni.png
 tags:
   - Containers
   - Kubernetes
@@ -18,33 +31,52 @@ modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/timoni/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-  - aid: timoni:timoni
-    name: Timoni Module Registry API
-    description: >-
-      Timoni modules are distributed as OCI artifacts in container registries. The registry API provides operations for
-      listing module tags, retrieving OCI manifests, and downloading module blobs containing CUE definitions and
-      Kubernetes configurations.
-    humanURL: https://timoni.sh/
-    baseURL: https://ghcr.io
-    tags:
-      - Containers
-      - Kubernetes
-      - Package Manager
-      - OCI Registry
-    properties:
-      - type: Documentation
-        url: https://timoni.sh/
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/timoni/refs/heads/main/openapi/timoni-openapi.yml
-      - type: GitHubRepository
-        url: https://github.com/stefanprodan/timoni
-      - type: JSONSchema
-        url: https://raw.githubusercontent.com/api-evangelist/timoni/refs/heads/main/json-schema/timoni-module-schema.json
-      - type: JSONStructure
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/timoni/refs/heads/main/json-structure/timoni-module-structure.json
-      - type: JSONLDContext
-        url: https://raw.githubusercontent.com/api-evangelist/timoni/refs/heads/main/json-ld/timoni-context.jsonld
+- aid: timoni:timoni-artifacts-api
+  name: Timoni Artifacts API
+  description: OCI artifact operations for Timoni packages
+  humanURL: https://timoni.sh/
+  baseURL: https://ghcr.io
+  tags:
+  - Artifacts
+  properties:
+  - type: OpenAPI
+    url: openapi/timoni-artifacts-api-openapi.yml
+  - type: Documentation
+    url: https://timoni.sh/
+  - type: GitHubRepository
+    url: https://github.com/stefanprodan/timoni
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/timoni/refs/heads/main/json-schema/timoni-module-schema.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/timoni/refs/heads/main/json-structure/timoni-module-structure.json
+  - type: JSONLDContext
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/timoni/refs/heads/main/json-ld/timoni-context.jsonld
+- aid: timoni:timoni-modules-api
+  name: Timoni Modules API
+  description: Timoni module management and distribution
+  humanURL: https://timoni.sh/
+  baseURL: https://ghcr.io
+  tags:
+  - Modules
+  properties:
+  - type: OpenAPI
+    url: openapi/timoni-modules-api-openapi.yml
+  - type: Documentation
+    url: https://timoni.sh/
+  - type: GitHubRepository
+    url: https://github.com/stefanprodan/timoni
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/timoni/refs/heads/main/json-schema/timoni-module-schema.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/timoni/refs/heads/main/json-structure/timoni-module-structure.json
+  - type: JSONLDContext
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/timoni/refs/heads/main/json-ld/timoni-context.jsonld
 features:
   - Type-safe Kubernetes configuration via CUE
   - OCI artifact distribution and signing
