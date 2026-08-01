@@ -1,0 +1,16 @@
+{
+  "provider": "timoni",
+  "sources": [
+    "timoni-artifacts-api-openapi.yml",
+    "timoni-modules-api-openapi.yml"
+  ],
+  "outputs": [
+    "timoni-artifacts-api-openapi.yml",
+    "timoni-modules-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

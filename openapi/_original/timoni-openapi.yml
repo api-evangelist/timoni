@@ -1,0 +1,229 @@
+openapi: 3.0.3
+info:
+  title: Timoni Module Registry API
+  description: >-
+    Timoni is a package manager for Kubernetes powered by CUE that provides type-safe
+    alternatives to Helm charts. Timoni modules are distributed as OCI artifacts
+    in container registries. This API describes the OCI registry operations used for
+    module distribution, versioning, and artifact management within the Timoni ecosystem.
+  version: v1
+  contact:
+    name: Timoni Documentation
+    url: https://timoni.sh/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+  - url: https://ghcr.io
+    description: GitHub Container Registry (default for Timoni modules)
+tags:
+  - name: Modules
+    description: Timoni module management and distribution
+  - name: Artifacts
+    description: OCI artifact operations for Timoni packages
+  - name: Registry
+    description: Container registry authentication and operations
+paths:
+  /v2/{registry}/{module}/tags/list:
+    get:
+      operationId: listModuleTags
+      summary: List Module Tags
+      description: >-
+        List all available version tags for a Timoni module in the OCI registry.
+        Returns all published versions using semantic versioning.
+      tags:
+        - Modules
+      parameters:
+        - name: registry
+          in: path
+          required: true
+          description: Registry namespace or organization
+          schema:
+            type: string
+        - name: module
+          in: path
+          required: true
+          description: Module name
+          schema:
+            type: string
+        - name: n
+          in: query
+          description: Maximum number of tags to return
+          schema:
+            type: integer
+        - name: last
+          in: query
+          description: Last tag for pagination
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of module tags
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /v2/{registry}/{module}/manifests/{reference}:
+    get:
+      operationId: getModuleManifest
+      summary: Get Module Manifest
+      description: >-
+        Retrieve the OCI manifest for a specific Timoni module version.
+        The manifest contains the module metadata, CUE definitions, and layer digests.
+      tags:
+        - Modules
+      parameters:
+        - name: registry
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: module
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: reference
+          in: path
+          required: true
+          description: Tag (e.g., v1.0.0) or digest (sha256:...)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OCI manifest for the module
+          content:
+            application/vnd.oci.image.manifest.v1+json:
+              schema:
+                $ref: '#/components/schemas/OciManifest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /v2/{registry}/{module}/blobs/{digest}:
+    get:
+      operationId: getModuleBlob
+      summary: Get Module Blob
+      description: >-
+        Download a specific blob layer of a Timoni module, typically containing
+        CUE definitions, values schemas, and module metadata.
+      tags:
+        - Artifacts
+      parameters:
+        - name: registry
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: module
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: digest
+          in: path
+          required: true
+          description: Blob digest in format sha256:<hash>
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Module blob content
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: OCI registry authentication token
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Username and password authentication for OCI registry
+  responses:
+    Unauthorized:
+      description: Unauthorized - invalid or missing credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Module or artifact not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+              detail:
+                type: string
+    TagList:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Repository name
+        tags:
+          type: array
+          items:
+            type: string
+          description: List of available version tags
+    OciManifest:
+      type: object
+      properties:
+        schemaVersion:
+          type: integer
+        mediaType:
+          type: string
+        config:
+          type: object
+          properties:
+            mediaType:
+              type: string
+            size:
+              type: integer
+            digest:
+              type: string
+        layers:
+          type: array
+          items:
+            type: object
+            properties:
+              mediaType:
+                type: string
+              size:
+                type: integer
+              digest:
+                type: string
+              annotations:
+                type: object
+        annotations:
+          type: object
+          properties:
+            org.opencontainers.image.created:
+              type: string
+            org.opencontainers.image.source:
+              type: string
+            org.opencontainers.image.version:
+              type: string
+            org.opencontainers.image.revision:
+              type: string
