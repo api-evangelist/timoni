@@ -1,0 +1,84 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Timoni Module Registry Artifacts Modules API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Modules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Module Tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ghcr.io/v2/:registry/:module/tags/list",
+            "params": [
+              {
+                "name": "registry",
+                "value": "",
+                "type": "path",
+                "description": "Registry namespace or organization"
+              },
+              {
+                "name": "module",
+                "value": "",
+                "type": "path",
+                "description": "Module name"
+              },
+              {
+                "name": "n",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of tags to return"
+              },
+              {
+                "name": "last",
+                "value": "",
+                "type": "query",
+                "description": "Last tag for pagination"
+              }
+            ]
+          },
+          "docs": "List all available version tags for a Timoni module in the OCI registry. Returns all published versions using semantic versioning."
+        },
+        {
+          "info": {
+            "name": "Get Module Manifest",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ghcr.io/v2/:registry/:module/manifests/:reference",
+            "params": [
+              {
+                "name": "registry",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "module",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "reference",
+                "value": "",
+                "type": "path",
+                "description": "Tag (e.g., v1.0.0) or digest (sha256:...)"
+              }
+            ]
+          },
+          "docs": "Retrieve the OCI manifest for a specific Timoni module version. The manifest contains the module metadata, CUE definitions, and layer digests."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
