@@ -5,6 +5,19 @@ description: >-
   enables software vendors to define complex application deployments packaged as Modules using CUE definitions,
   distributed as OCI artifacts in container registries with semantic versioning and cryptographic signing.
 type: Index
+deliveryModel:
+  model: self-hosted
+  license: Apache-2.0
+  open_source: true
+  commercial: false
+  callable_host: true
+  label: Self-hosted open source · you run it yourself
+  confidence: high
+  source:
+  - license
+  - openapi
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
@@ -104,6 +117,16 @@ solutions:
   - Infrastructure as code
   - CUE-based configuration management
 common:
+  - type: IssueTracker
+    url: https://github.com/stefanprodan/timoni/issues
+  - type: Releases
+    url: https://github.com/stefanprodan/timoni/releases
+  - type: SecurityPolicy
+    url: https://github.com/stefanprodan/timoni/blob/main/SECURITY.md
+  - type: CodeOfConduct
+    url: https://github.com/stefanprodan/timoni/blob/main/CODE_OF_CONDUCT.md
+  - type: ContributionGuide
+    url: https://github.com/stefanprodan/timoni/blob/main/CONTRIBUTING.md
   - type: License
     name: Apache-2.0
     url: https://github.com/stefanprodan/timoni/blob/main/LICENSE
