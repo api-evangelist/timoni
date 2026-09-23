@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Timoni Module Registry Artifacts Modules API
+  title: Timoni Module Registry Modules API
   description: Timoni is a package manager for Kubernetes powered by CUE that provides type-safe alternatives to Helm charts. Timoni modules are distributed as OCI artifacts in container registries. This API describes the OCI registry operations used for module distribution, versioning, and artifact management within the Timoni ecosystem.
   version: v1
   contact:
@@ -91,20 +91,32 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    Unauthorized:
-      description: Unauthorized - invalid or missing credentials
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Module or artifact not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    TagList:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Repository name
+        tags:
+          type: array
+          items:
+            type: string
+          description: List of available version tags
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+              detail:
+                type: string
     OciManifest:
       type: object
       properties:
@@ -145,31 +157,19 @@ components:
               type: string
             org.opencontainers.image.revision:
               type: string
-    Error:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: string
-              message:
-                type: string
-              detail:
-                type: string
-    TagList:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Repository name
-        tags:
-          type: array
-          items:
-            type: string
-          description: List of available version tags
+  responses:
+    Unauthorized:
+      description: Unauthorized - invalid or missing credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Module or artifact not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
