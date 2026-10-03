@@ -92,19 +92,44 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    Unauthorized:
-      description: Unauthorized - invalid or missing credentials
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     NotFound:
       description: Module or artifact not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - invalid or missing credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+              detail:
+                type: string
+    TagList:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Repository name
+        tags:
+          type: array
+          items:
+            type: string
+          description: List of available version tags
     OciManifest:
       type: object
       properties:
@@ -145,31 +170,6 @@ components:
               type: string
             org.opencontainers.image.revision:
               type: string
-    TagList:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Repository name
-        tags:
-          type: array
-          items:
-            type: string
-          description: List of available version tags
-    Error:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: string
-              message:
-                type: string
-              detail:
-                type: string
   securitySchemes:
     bearerAuth:
       type: http
