@@ -92,20 +92,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: string
-              message:
-                type: string
-              detail:
-                type: string
     TagList:
       type: object
       properties:
@@ -157,15 +143,29 @@ components:
               type: string
             org.opencontainers.image.revision:
               type: string
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+              detail:
+                type: string
   responses:
-    Unauthorized:
-      description: Unauthorized - invalid or missing credentials
+    NotFound:
+      description: Module or artifact not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Module or artifact not found
+    Unauthorized:
+      description: Unauthorized - invalid or missing credentials
       content:
         application/json:
           schema:
